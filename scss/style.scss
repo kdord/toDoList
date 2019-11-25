@@ -1,0 +1,41 @@
+
+//modal popup 
+.create_window {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	// overflow: auto;
+	background-color: rgba(0, 0, 0, 0.5);
+	
+}
+.create_window_content {
+
+	margin: 10% auto;
+	background-color: white;
+	padding: 1rem 1.5rem;
+	width:24rem;
+	
+	border-radius: 0.5rem;
+}
+.create_window .create_window_btns span {
+	width: 100px;
+	line-height: 1.5rem;
+	text-align: center;
+	
+	border-radius: 0.25rem;
+	background-color: lightgray;
+}
+.create_window_btns span:hover{
+	background-color: darkgray;
+}
+
+
+.itemCard {
+	width: 300px;
+	height: 350px;
+	border: 1px solid black; 
+}

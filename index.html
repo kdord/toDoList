@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TODOList</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="css/style.css">
+	
+</head>
+<body>
+
+	<h1>TODOList</h1>
+	<div>
+		<!-- trigger -->
+		<button id="create_btn" class="btn btn-dark">Create</button>
+		<div id="create_window" class="create_window">
+			<div class="create_window_content">
+				
+				
+				<form action="POST">
+					<div class="form-group">
+						<label for="item_title" class="col-form-label">Title</label>
+						<input type="text" id="item_title" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="item_text" class="col-form-label">Text</label>
+						<input type="text" id="item_text" class="form-control">
+					</div>
+					<div class="form-group">
+						<label for="item-priority" class="col-form-label">Priority</label>
+						<select name="item_priority" id="item_priority" class="form-control">
+							<option value="high">High</option>
+							<option selected value="normal">Normal</option>
+							<option value="low">Low</option>
+						</select>
+					</div>
+					<div class="create_window_btns d-flex justify-content-around">
+						<span class="close_btn btn">Close</span>
+						<span type="button" class="save_btn btn" id="createBtn" onclick="createItem()" value="Submit">Save</span>
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+		<div class="items container-fluid" id="itemsDiv">
+			
+		</div>
+
+
+	</div>
+
+<script type="text/javascript" src="index.js"></script>
+
+</body>
+</html>
