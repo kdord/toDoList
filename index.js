@@ -30,15 +30,16 @@ class Item {
 		this.state = "open";
 	}
 }
-itemsArray.push(new Item("title1", "todo text", "normal"))
+
+
 
 let createItem = () => {
-	saveItem();
+	saveItem(); // create new item from input data and push it to itemsArray
 	console.log(itemsArray);
-	itemsDiv.innerHTML = "";
-	arrayDisplay();
+	itemsDiv.innerHTML = ""; //delete all displayed items 
+	arrayDisplay(); //update displaying
 	create_window.style.display = "none";
-	clearForm();
+	clearForm(); //clear input forms
 }
 
 let saveItem = () => {
@@ -57,15 +58,46 @@ let clearForm = () => {
 	document.getElementById("item_priority").value = "normal";
 	console.log("cleared")
 }
+
 let itemsDiv = document.getElementById("itemsDiv");
 itemsDiv.className = "d-flex"
 
-let displayItem = (element) => {
+let arrayDisplay = () => {
+	itemsArray.forEach( function(element) {
+		if(element.state === "open") {
+			displayOpenItem(element);
+			
+		} else {
+			displayDoneItem(element);
+		}
+		
+		
+	});
+}
+
+
+let displayOpenItem = (element) => {
 	let itemCard = document.createElement("div");
-	itemCard.className = "card"
+	itemCard.className = "itemCard"
 	itemsDiv.prepend(itemCard);
-	itemCard.className = "itemCard p-5 m-3";
 	
+	createItemCardContent(itemCard, element);
+
+}
+
+let displayDoneItem = (element) => {
+	let itemCard = document.createElement("div");
+	itemCard.className = "itemCard done"
+	itemsDiv.append(itemCard);
+	
+	createItemCardContent(itemCard, element);
+
+	
+}
+
+
+let createItemCardContent = (itemCard, element) => {
+
 	let itemTitleDiv = document.createElement("div");
 	itemCard.append(itemTitleDiv);
 	itemTitleDiv.innerHTML = element.title;
@@ -77,19 +109,97 @@ let displayItem = (element) => {
 
 	let itemFooterDiv = document.createElement("div");
 	itemCard.append(itemFooterDiv);
+	itemFooterDiv.className = "d-flex justify-content-between"
 	
 
 	let itemPrioritySpan = document.createElement("span");
 	itemFooterDiv.append(itemPrioritySpan);
 	itemPrioritySpan.innerHTML = element.priority;
 
+	
+	//create dropdown menu
+	let dropdownSpan = document.createElement("span");
+	itemFooterDiv.append(dropdownSpan);
+	
+	let dropdownToggle = document.createElement("button");
+	dropdownSpan.append(dropdownToggle);
+	dropdownToggle.className = "btn ";
+	dropdownToggle.setAttribute("id", "dropdownMenuLink");
+	dropdownToggle.setAttribute("type", "button");
+	dropdownToggle.setAttribute("aria-haspopup", "true");
+	dropdownToggle.setAttribute("aria-expanded", "false");
+	dropdownToggle.setAttribute("data-toggle", "dropdown");
+	dropdownToggle.innerHTML = "..."
+
+	let dropdownMenu = document.createElement("div");
+	dropdownSpan.append(dropdownMenu);
+	dropdownMenu.className = "dropdown-menu";
+	dropdownMenu.setAttribute("aria-labelledby", "dropdownMenuLink")
+
+	let doneBtn = document.createElement("a");
+	dropdownMenu.append(doneBtn);
+	doneBtn.className = "dropdown-item";
+
+	if (element.state ==="open") {
+		doneBtn.innerHTML = "Done";
+		doneBtn.setAttribute("onclick", "doneClick(this)")
+	} else {
+		doneBtn.innerHTML = "Open";
+		doneBtn.setAttribute("onclick", "openClick(this)")
+	}
+
+	
+
+	let editBtn = document.createElement("a");
+	dropdownMenu.append(editBtn);
+	editBtn.className = "dropdown-item";
+	editBtn.innerHTML = "Edit"
+
+	let deleteBtn = document.createElement("a");
+	dropdownMenu.append(deleteBtn);
+	deleteBtn.className = "dropdown-item";
+	deleteBtn.innerHTML = "Delete"
 }
 
-let arrayDisplay = () => {
+let openClick = (element) => {
+	let title = element.parentNode.parentNode.parentNode.parentNode.firstChild;
+	console.log(title.innerHTML)
 	itemsArray.forEach( function(element) {
-		displayItem(element);
+		if (element.title === title.innerHTML) {
+			console.log("find")
+			element.state = "open"
+			console.log(itemsArray)
+
+		}
+		itemsDiv.innerHTML = ""; //delete all displayed items 
+		arrayDisplay();
+	});
+}
+
+let doneClick = (element) => {
+	let title = element.parentNode.parentNode.parentNode.parentNode.firstChild;
+	console.log(title.innerHTML)
+	itemsArray.forEach( function(element) {
+		if (element.title === title.innerHTML) {
+			console.log("find")
+			element.state = "done"
+			console.log(itemsArray)
+
+		}
+		itemsDiv.innerHTML = ""; //delete all displayed items 
+		arrayDisplay();
 	});
 }
 
 
+
+
+let init = () => {
+	let firstItem = new Item("title1", "todo text", "normal")
+	itemsArray.push(firstItem)
+	arrayDisplay();
+}
+
+init();
 console.log(itemsArray)
+
