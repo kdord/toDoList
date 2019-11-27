@@ -99,11 +99,9 @@ let priorityFilteredDisplay = (filterValue) => {
         if (filterValue === "all") {
             updateDisplay();
         }
-        if (element.priority === filterValue && element.state === "open") {
-            displayOpenItem(element);
-        } else if (element.priority === filterValue && element.state === "done") {
-            displayDoneItem(element);
-        }
+        if (element.priority === filterValue) {
+            itemDisplay(element);
+        } 
     });
 }
 
@@ -157,8 +155,33 @@ let stateFilteredDisplay = (filterValue) => {
 }
 
 
+
+
 let searchFilter = document.createElement("input");
-searchFilter.className = "col-4";
+searchFilter.className = "searchFilter col-4";
+searchFilter.setAttribute("id", "searchFilter");
+searchFilter.setAttribute("type", "text");
+searchFilter.setAttribute("placeholder", "Search by title")
+searchFilter.setAttribute("onkeypress", "return searchFilterFunc(event, this.value)")
+
+
+let searchFilterFunc = (event, text) => {
+	if (event.keyCode == 13) {
+		searchFilterDisplay(text);
+	}
+
+
+}
+
+let searchFilterDisplay = (filterValue) => {
+	itemsDiv.innerHTML = "";
+	itemsArray.forEach( function(element) {
+		if (element.title.includes(filterValue)) {
+			itemDisplay(element)
+		}
+	});
+
+}
 
 toolBarDiv.prepend(searchFilter)
 
@@ -198,40 +221,6 @@ let clearForm = () => {
 
 let itemsDiv = document.getElementById("itemsDiv");
 itemsDiv.className = "d-flex"
-
-let arrayDisplay = () => {
-
-    itemsArray.forEach(function(element) {
-        if (element.state === "open") {
-            displayOpenItem(element);
-
-        } else {
-            displayDoneItem(element);
-        }
-
-
-    });
-}
-
-
-let displayOpenItem = (element) => {
-    let itemCard = document.createElement("div");
-    itemCard.className = "itemCard"
-    itemsDiv.prepend(itemCard);
-
-    createItemCardContent(itemCard, element);
-
-}
-
-let displayDoneItem = (element) => {
-    let itemCard = document.createElement("div");
-    itemCard.className = "itemCard done"
-    itemsDiv.append(itemCard);
-
-    createItemCardContent(itemCard, element);
-
-
-}
 
 
 let createItemCardContent = (itemCard, element) => {
@@ -352,10 +341,50 @@ let deleteClick = (btnElement) => {
 
 }
 
+let arrayDisplay = () => {
+
+    itemsArray.forEach(function(element) {
+        itemDisplay(element);
+
+
+    });
+}
+
+
+let itemDisplay = (element) => {
+	if (element.state === "open") {
+            displayOpenItem(element);
+
+        } else {
+            displayDoneItem(element);
+    }
+}
+
+let displayOpenItem = (element) => {
+    let itemCard = document.createElement("div");
+    itemCard.className = "itemCard"
+    itemsDiv.prepend(itemCard);
+
+    createItemCardContent(itemCard, element);
+
+}
+
+let displayDoneItem = (element) => {
+    let itemCard = document.createElement("div");
+    itemCard.className = "itemCard done"
+    itemsDiv.append(itemCard);
+
+    createItemCardContent(itemCard, element);
+
+
+}
+
+
 let updateDisplay = () => {
     itemsDiv.innerHTML = ""; //delete all displayed items 
     arrayDisplay();
     priorityFilter.value = "all" //reset filter
+    searchFilter.value = ""
     console.log("updated")
 }
 
