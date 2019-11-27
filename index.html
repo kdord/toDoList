@@ -12,9 +12,11 @@
 <body>
 
 	<h1>TODOList</h1>
+	<div class="toolbar" id="toolbar">
+		
+	</div>
 	<div>
-		<!-- trigger -->
-		<button id="create_btn" class="btn btn-dark">Create</button>
+		
 		<div id="create_window" class="create_window">
 			<div class="create_window_content">
 				
@@ -37,7 +39,7 @@
 						</select>
 					</div>
 					<div class="create_window_btns d-flex justify-content-around">
-						<span class="close_btn btn">Close</span>
+						<span class="close_btn btn" id="closeBtn">Close</span>
 						<span type="button" class="save_btn btn" id="createBtn" onclick="createItem()" value="Submit">Save</span>
 					</div>
 				</form>
