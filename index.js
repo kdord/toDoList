@@ -8,10 +8,27 @@ let itemTitle = document.getElementById("item_title");
 let itemText = document.getElementById("item_text");
 let itemPriority = document.getElementById("item_priority");
 
+let itemsArray = new Array();
+
+//
+class Item {
+    constructor(title, text, priority, state) {
+        this.title = title;
+        this.text = text;
+        this.priority = priority;
+        this.state = "open";
+    }
+}
+
+
+//TOOLBAR 
 let toolBarDiv = document.getElementById("toolbar");
+toolBarDiv.className = "d-flex justify-content-around"
 
 let createBtn = document.createElement("button");
 let closeBtn = document.getElementById("closeBtn");
+
+
 
 toolBarDiv.append(createBtn);
 
@@ -20,12 +37,12 @@ createBtn.innerHTML = "Create";
 
 
 createBtn.onclick = () => {
-	create_window.style.display = "block";
+    create_window.style.display = "block";
 
 }
 
 closeBtn.onclick = () => {
-	create_window.style.display = "none";
+    create_window.style.display = "none";
 }
 
 window.onclick = function(event) {
@@ -34,10 +51,12 @@ window.onclick = function(event) {
     }
 }
 
+
 let priorityFilter = document.createElement("select");
 priorityFilter.className = "priorityFilter custom-select col-3";
 priorityFilter.setAttribute("id", "priorityFilter")
 
+toolBarDiv.prepend(priorityFilter)
 
 
 let priorityFilterAllOption = document.createElement("option");
@@ -61,51 +80,94 @@ priorityFilterLowOption.setAttribute("value", "low")
 priorityFilterLowOption.innerHTML = "Low";
 priorityFilter.append(priorityFilterLowOption);
 
-
-
-toolBarDiv.prepend(priorityFilter)
-
 // add eventListener to filter
-document.addEventListener('input', function (event) {
+document.addEventListener('input', function(event) {
 
-	// Only run on our select menu
-	if (event.target.id !== 'priorityFilter') return;
+    // Only run on our select menu
+    if (event.target.id !== 'priorityFilter') return;
 
-	// The selected value
-	let value = event.target.value;
-	console.log(value);
-	filteredDisplay(value)
-	
+    // The selected value
+    let value = event.target.value;
+    console.log(value);
+    priorityFilteredDisplay(value)
+
 }, false);
 
-let filteredDisplay = (filterValue) => {
-	itemsDiv.innerHTML = "";
-	itemsArray.forEach( function(element) {
-		if(filterValue === "all"){
-			updateDisplay()
-		}
-		if (element.priority === filterValue && element.state === "open"){
-			displayOpenItem(element);
-		} else if (element.priority === filterValue && element.state ==="done") {
-			displayDoneItem(element);
-		} 
-	});
+let priorityFilteredDisplay = (filterValue) => {
+    itemsDiv.innerHTML = "";
+    itemsArray.forEach(function(element) {
+        if (filterValue === "all") {
+            updateDisplay();
+        }
+        if (element.priority === filterValue && element.state === "open") {
+            displayOpenItem(element);
+        } else if (element.priority === filterValue && element.state === "done") {
+            displayDoneItem(element);
+        }
+    });
 }
 
 
+let stateFilter = document.createElement("select");
+stateFilter.className = "stateFilter custom-select col-3";
+stateFilter.setAttribute("id", "stateFilter");
+
+toolBarDiv.prepend(stateFilter);
+
+let stateFilterAllOption = document.createElement("option");
+stateFilterAllOption.setAttribute("selected", "true");
+stateFilterAllOption.setAttribute("value", "all");
+stateFilterAllOption.innerHTML = "All";
+stateFilter.append(stateFilterAllOption);
 
 
-let itemsArray = new Array();
+let stateFilterOpenOption = document.createElement("option");
+stateFilterOpenOption.setAttribute("value", "open");
+stateFilterOpenOption.innerHTML = "Open";
+stateFilter.append(stateFilterOpenOption);
 
-//
-class Item {
-    constructor(title, text, priority, state) {
-        this.title = title;
-        this.text = text;
-        this.priority = priority;
-        this.state = "open";
-    }
+let stateFilterDoneOption = document.createElement("option");
+stateFilterDoneOption.setAttribute("value", "done");
+stateFilterDoneOption.innerHTML = "Done";
+stateFilter.append(stateFilterDoneOption);
+
+//add eventListener to filter 
+
+document.addEventListener('input', function(event) {
+    if (event.target.id !== 'stateFilter') return
+
+    let value = event.target.value;
+    console.log(value);
+    stateFilteredDisplay(value);
+
+
+}, false);
+
+let stateFilteredDisplay = (filterValue) => {
+    itemsDiv.innerHTML = "";
+    itemsArray.forEach(function(element) {
+        if (filterValue === "all") updateDisplay();
+
+        if (filterValue === "open" && element.state === "open") {
+        	displayOpenItem(element);
+        } else if( filterValue ==="done" && element.state === "done") {
+        	displayDoneItem(element);
+        }
+    });
 }
+
+
+let searchFilter = document.createElement("input");
+searchFilter.className = "col-4";
+
+toolBarDiv.prepend(searchFilter)
+
+
+
+
+
+
+
 
 
 
@@ -282,10 +344,10 @@ let editClick = (btnElement) => {
 }
 
 let deleteClick = (btnElement) => {
-	let foundElement = findItemByTitle(btnElement);
-	let index = itemsArray.indexOf(foundElement);
-	let removedItem = itemsArray.splice(index, 1);
-	updateDisplay()
+    let foundElement = findItemByTitle(btnElement);
+    let index = itemsArray.indexOf(foundElement);
+    let removedItem = itemsArray.splice(index, 1);
+    updateDisplay()
 
 
 }
@@ -293,7 +355,7 @@ let deleteClick = (btnElement) => {
 let updateDisplay = () => {
     itemsDiv.innerHTML = ""; //delete all displayed items 
     arrayDisplay();
-    priorityFilter.value = "all"//reset filter
+    priorityFilter.value = "all" //reset filter
     console.log("updated")
 }
 
