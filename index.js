@@ -32,7 +32,8 @@ let closeBtn = document.getElementById("closeBtn");
 
 toolBarDiv.append(createBtn);
 
-createBtn.className = "btn btn-dark col-2";
+createBtn.className = "btn ";
+createBtn.setAttribute("id", "createBtn")
 createBtn.innerHTML = "Create";
 
 
@@ -53,7 +54,7 @@ window.onclick = function(event) {
 
 
 let priorityFilter = document.createElement("select");
-priorityFilter.className = "priorityFilter custom-select col-3";
+priorityFilter.className = "priorityFilter custom-select";
 priorityFilter.setAttribute("id", "priorityFilter")
 
 toolBarDiv.prepend(priorityFilter)
@@ -107,7 +108,7 @@ let priorityFilteredDisplay = (filterValue) => {
 
 
 let stateFilter = document.createElement("select");
-stateFilter.className = "stateFilter custom-select col-3";
+stateFilter.className = "stateFilter custom-select ";
 stateFilter.setAttribute("id", "stateFilter");
 
 toolBarDiv.prepend(stateFilter);
@@ -158,7 +159,7 @@ let stateFilteredDisplay = (filterValue) => {
 
 
 let searchFilter = document.createElement("input");
-searchFilter.className = "searchFilter col-4";
+searchFilter.className = "searchFilter ";
 searchFilter.setAttribute("id", "searchFilter");
 searchFilter.setAttribute("type", "text");
 searchFilter.setAttribute("placeholder", "Search by title")
@@ -220,7 +221,7 @@ let clearForm = () => {
 }
 
 let itemsDiv = document.getElementById("itemsDiv");
-itemsDiv.className = "d-flex"
+itemsDiv.className = "d-flex row "
 
 
 let createItemCardContent = (itemCard, element) => {
@@ -234,14 +235,20 @@ let createItemCardContent = (itemCard, element) => {
     itemTextDiv.className = "my-5"
     itemTextDiv.innerHTML = element.text;
 
+
+   
+
     let itemFooterDiv = document.createElement("div");
+   
     itemCard.append(itemFooterDiv);
     itemFooterDiv.className = "d-flex justify-content-between"
+    itemFooterDiv.setAttribute("id", "itemFooterDiv")
 
 
     let itemPrioritySpan = document.createElement("span");
     itemFooterDiv.append(itemPrioritySpan);
     itemPrioritySpan.innerHTML = element.priority;
+    itemPrioritySpan.setAttribute("id", "prioritySpan");
 
 
     //create dropdown menu
@@ -256,7 +263,7 @@ let createItemCardContent = (itemCard, element) => {
     dropdownToggle.setAttribute("aria-haspopup", "true");
     dropdownToggle.setAttribute("aria-expanded", "false");
     dropdownToggle.setAttribute("data-toggle", "dropdown");
-    dropdownToggle.innerHTML = "..."
+    dropdownToggle.innerHTML = "<span>...</span>"
 
     let dropdownMenu = document.createElement("div");
     dropdownSpan.append(dropdownMenu);
@@ -362,7 +369,7 @@ let itemDisplay = (element) => {
 
 let displayOpenItem = (element) => {
     let itemCard = document.createElement("div");
-    itemCard.className = "itemCard"
+    itemCard.className = "itemCard mx-4  "
     itemsDiv.prepend(itemCard);
 
     createItemCardContent(itemCard, element);
@@ -371,7 +378,7 @@ let displayOpenItem = (element) => {
 
 let displayDoneItem = (element) => {
     let itemCard = document.createElement("div");
-    itemCard.className = "itemCard done"
+    itemCard.className = "itemCard  mx-4 done"
     itemsDiv.append(itemCard);
 
     createItemCardContent(itemCard, element);
@@ -391,8 +398,11 @@ let updateDisplay = () => {
 let init = () => {
     let firstItem = new Item("title1", "todo text", "normal")
     itemsArray.push(firstItem)
-    arrayDisplay();
+    updateDisplay();
 }
 
 init();
+init();
+init();
+
 console.log(itemsArray)

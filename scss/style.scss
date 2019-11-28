@@ -1,49 +1,186 @@
+$fontLight :'Roboto', sans-serif;
+
+@mixin toolbarItem {
+    margin-right: 2%;
+    padding: 0 15px;
+    color: black;
+    border: 2px solid black;
+    border-radius: 0;
+    background-color: white;
+    height: 50px;
+}
+@mixin createWindowBtns {
+	width: 100px;
+    line-height: 1.5rem;
+    text-align: center;
+
+    border-radius: 15px;
+    border: 2px solid #000;
+    background-color: #fff;
+}
+
+
+html {
+    font-family: $fontLight;
+    font-size: 1.2em;
+    
+
+}
+
+#header {
+    height: 50px;
+    padding: 13px 10px 10px 10px;
+    border-bottom: 2px solid black;
+    margin-bottom: 30px;
+
+}
+
+#headerTitle {
+    margin: 0;
+    font-weight: bold;
+}
+
+div#toolbar {
+ 	margin: 0 7vw;
+    display: inline;
+}
+
+input#searchFilter {
+    @include toolbarItem;
+
+    width: 25vw;
+
+}
+
+input#searchFilter::placeholder {
+	color: black;
+
+};
+
+select#stateFilter {
+    @include toolbarItem;
+    max-width: 300px;
+   
+}
+
+select#priorityFilter {
+	@include toolbarItem;
+	 max-width: 300px;
+
+}
+
+button#createBtn {
+	@include toolbarItem;
+	width: 125px;
+	border-radius: 15px;
+	margin-right: 0;
+}
+
+div#itemsDiv {
+	padding: 3vh 7vw;
+	border: none;
+	display: flex;
+
+}
+
 
 //modal popup 
 .create_window {
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	// overflow: auto;
-	background-color: rgba(0, 0, 0, 0.5);
-	
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    // overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+
+
 }
+
 .create_window_content {
-
-	margin: 10% auto;
-	background-color: white;
-	padding: 1rem 1.5rem;
-	width:24rem;
-	
-	border-radius: 0.5rem;
-}
-.create_window .create_window_btns span {
-	width: 100px;
-	line-height: 1.5rem;
-	text-align: center;
-	
-	border-radius: 0.25rem;
-	background-color: lightgray;
-}
-.create_window_btns span:hover{
-	background-color: darkgray;
+	color: #000;
+    margin: 5% auto;
+    background-color: white;
+    padding: 1rem 1.5rem;
+    width: 24rem;
+    border-radius: 0;
 }
 
+
+.create_window_content input {
+	border: 2px solid black;
+	border-radius: 0;
+
+}
+
+.create_window_content input::placeholder {
+	color: #000;
+}
+
+.create_window_content select {
+	border: 2px solid black;
+	border-radius: 0;
+	text-decoration: none;
+	color: #000;
+}
+
+#closeBtn {
+	@include createWindowBtns;
+}
+
+span#saveBtn {
+	@include createWindowBtns;
+}
 
 .itemCard {
-	width: 300px;
-	height: 350px;
-	border: 1px solid black; 
-	margin: 1rem;
-	padding: 3rem;
+    width: 325px;
+    height: 325px;
+    border: 2px solid black;
+    padding: 35px;
+	margin: 15px auto;
+	font-weight: 500;
+	position: relative;
+
+
+}
+
+div.itemCard.done {
+    background-color: silver;
+}
+
+#itemFooterDiv {
+	position: absolute;
+	bottom: 30px;
 
 	
 }
 
- div.itemCard.done {
-	background-color: silver;
+
+
+#prioritySpan {
+	width: 80px;
+	height: 45px;
+	border : 3px dashed black;
+	border-radius: 15px;
+	text-align: center;
+	line-height: 1.9;
+
+}
+
+
+#dropdownMenuLink {
+	background-color: white;
+	
+	height: 45px;
+	border : 3px dashed black;
+	border-radius: 15px;
+	text-align: center;
+	margin-left: 120px;
+	
+}
+#dropdownMenuLink span {
+	font-weight: 500;
+
 }

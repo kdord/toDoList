@@ -1,62 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>TODOList</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>TODOList</title>
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
+
 <body>
-
-	<h1>TODOList</h1>
-	<div class="toolbar input-group" id="toolbar">
-		
-	</div>
-	<div>
-		
-		<div id="create_window" class="create_window">
-			<div class="create_window_content">
-				
-				
-				<form action="POST">
-					<div class="form-group">
-						<label for="item_title" class="col-form-label">Title</label>
-						<input type="text" id="item_title" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="item_text" class="col-form-label">Text</label>
-						<input type="text" id="item_text" class="form-control">
-					</div>
-					<div class="form-group">
-						<label for="item-priority" class="col-form-label">Priority</label>
-						<select name="item_priority" id="item_priority" class="form-control">
-							<option value="high">High</option>
-							<option selected value="normal">Normal</option>
-							<option value="low">Low</option>
-						</select>
-					</div>
-					<div class="create_window_btns d-flex justify-content-around">
-						<span class="close_btn btn" id="closeBtn">Close</span>
-						<span type="button" class="save_btn btn" id="createBtn" onclick="createItem()" value="Submit">Save</span>
-					</div>
-				</form>
-
-			</div>
-		</div>
-
-		<div class="items container-fluid" id="itemsDiv">
-			
-		</div>
-	
-
-	</div>
-
-<script type="text/javascript" src="index.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <div id="header">
+        <h6 id="headerTitle">TODOList</h6>
+    </div>
+    <div class="toolbar input-group m-2" id="toolbar">
+    </div>
+    <div>
+        <div id="create_window" class="create_window">
+            <div class="create_window_content">
+                <form action="POST">
+                    <div class="form-group">
+                        <label for="item_title" class="col-form-label">Title</label>
+                        <input type="text" id="item_title" class="form-control" placeholder="Title">
+                    </div>
+                    <div class="form-group">
+                        <label for="item_text" class="col-form-label">Text</label>
+                        <input type="text" id="item_text" class="form-control" placeholder="Text">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-priority" class="col-form-label">Priority</label>
+                        <select name="item_priority" id="item_priority" class="form-control">
+                            <option value="high">High</option>
+                            <option selected value="normal">Normal</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                    <div class="create_window_btns d-flex justify-content-around">
+                        <span class="close_btn btn" id="closeBtn">Close</span>
+                        <span class="save_btn btn" id="saveBtn" onclick="createItem()" value="Submit">Save</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="items container-fluid" id="itemsDiv">
+        </div>
+    </div>
+    <script type="text/javascript" src="index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+
 </html>
