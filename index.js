@@ -188,13 +188,6 @@ toolBarDiv.prepend(searchFilter)
 
 
 
-
-
-
-
-
-
-
 let createItem = () => {
     saveItem(); // create new item from input data and push it to itemsArray
     console.log(itemsArray);
@@ -402,7 +395,6 @@ let init = () => {
 }
 
 init();
-init();
-init();
+
 
 console.log(itemsArray)
